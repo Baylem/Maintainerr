@@ -1,3 +1,4 @@
+import { CantinarrApiModule } from '../api/cantinarr-api/cantinarr-api.module';
 import { Global, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { InternalApiModule } from '../api/internal-api/internal-api.module';
@@ -38,6 +39,7 @@ import { SettingsDataService } from './settings-data.service';
     MediaServerModule,
     ServarrApiModule,
     SeerrApiModule,
+    CantinarrApiModule,
     TautulliApiModule,
     StreamystatsApiModule,
     TracearrApiModule,

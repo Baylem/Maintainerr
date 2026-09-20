@@ -318,6 +318,7 @@ export class SettingsDataService implements SettingDto {
       jellyfin_api_key: maskSecret(settings.jellyfin_api_key),
       emby_api_key: maskSecret(settings.emby_api_key),
       seerr_api_key: maskSecret(settings.seerr_api_key),
+      cantinarr_api_key: maskSecret(settings.cantinarr_api_key),
       tmdb_api_key: maskSecret(settings.tmdb_api_key),
       tvdb_api_key: maskSecret(settings.tvdb_api_key),
       tautulli_api_key: maskSecret(settings.tautulli_api_key),

@@ -24,3 +24,5 @@ export * from './tracearr'
 export * from './tasks'
 export * from './telemetry'
 export * from './uploads'
+
+export * from './settings/cantinarr/cantinarrSetting'

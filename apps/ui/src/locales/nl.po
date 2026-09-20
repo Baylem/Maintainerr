@@ -677,6 +677,22 @@ msgstr "Annuleren"
 msgid "Cannot delete preset templates"
 msgstr "Kan standaardtemplates niet wissen"
 
+#: src/components/Settings/Cantinarr/CantinarrSettings.tsx
+msgid "Cantinarr connection could not be saved"
+msgstr ""
+
+#: src/components/Settings/Cantinarr/CantinarrSettings.tsx
+msgid "Cantinarr connection saved"
+msgstr ""
+
+#: src/components/Settings/Cantinarr/CantinarrSettings.tsx
+msgid "Cantinarr Settings"
+msgstr ""
+
+#: src/components/Settings/Cantinarr/CantinarrSettings.tsx
+msgid "Cantinarr settings - Maintainerr"
+msgstr ""
+
 #: src/components/OverlayEditor/PropertiesPanel.tsx
 msgid "center"
 msgstr "Centreren"
@@ -891,6 +907,10 @@ msgstr "Bevestig het verwijderen van elke uitsluiting"
 #: src/components/StorageMetrics/index.tsx
 msgid "Connect a Plex or Jellyfin server in Settings to see library item counts here."
 msgstr "Verbind een Plex- of Jellyfin-server via Instellingen om hier het aantal bibliotheekitems te zien."
+
+#: src/components/Settings/Cantinarr/CantinarrSettings.tsx
+msgid "Connect to the Cantinarr integration API v1 build. This connection validates retained request history; it does not enable Cantinarr retention rules."
+msgstr ""
 
 #: src/components/Settings/index.tsx
 msgid "Connect your media server to finish setup."
@@ -1566,6 +1586,10 @@ msgstr "Berekenen van bibliotheekomvang mislukt. Controleer of Maintainerr verbi
 msgid "Failed to connect to {serviceName}. Verify URL and API key."
 msgstr "Kan geen verbinding maken met {serviceName}. Controleer de URL en API-sleutel."
 
+#: src/components/Settings/Cantinarr/CantinarrSettings.tsx
+msgid "Failed to connect to Cantinarr. Check the integration build, URL, token permissions and history completeness."
+msgstr ""
+
 #: src/components/Settings/Emby/index.tsx
 msgid "Failed to connect to Emby. Verify URL and API key."
 msgstr "Kan geen verbinding maken met Emby. Controleer de URL en API-sleutel."
@@ -2014,6 +2038,10 @@ msgstr "Info"
 #: src/pages/CollectionsListPage.tsx
 msgid "Initiated collection handling in the background."
 msgstr "Collectieverwerking op de achtergrond gestart."
+
+#: src/components/Settings/Cantinarr/CantinarrSettings.tsx
+msgid "Integration token"
+msgstr ""
 
 #: src/components/Rules/RuleGroup/AddModal/index.tsx
 msgid "Invalid action"
@@ -4490,6 +4518,10 @@ msgstr "Geüpload YAML bestand is leeg."
 #: src/components/OverlayEditor/PropertiesPanel.tsx
 msgid "Uppercase"
 msgstr "Hoofdletters"
+
+#: src/components/Settings/Cantinarr/CantinarrSettings.tsx
+msgid "Use an expiring integration token with request and identity read permissions. Enter it again when changing the URL."
+msgstr ""
 
 #: src/components/Settings/Plex/index.tsx
 msgid "Use HTTPS"

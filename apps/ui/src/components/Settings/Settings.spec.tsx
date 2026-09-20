@@ -111,6 +111,7 @@ describe('SettingsWrapper', () => {
     expect(getDesktopTabLabels(container)).toEqual([
       'General',
       'Jellyfin',
+      'Cantinarr',
       'Seerr',
       'Radarr',
       'Sonarr',
@@ -144,6 +145,7 @@ describe('SettingsWrapper', () => {
     expect(getDesktopTabLabels(container)).toEqual([
       'General',
       'Jellyfin',
+      'Cantinarr',
       'Seerr',
       'Radarr',
       'Sonarr',

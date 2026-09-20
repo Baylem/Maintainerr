@@ -161,6 +161,11 @@ const SettingsWrapper = () => {
     // Add remaining tabs
     baseRoutes.push(
       {
+        text: 'Cantinarr',
+        route: '/settings/cantinarr',
+        regex: new RegExp('^/settings/cantinarr$'),
+      },
+      {
         text: 'Seerr',
         route: '/settings/seerr',
         regex: /^\/settings\/seerr$/,

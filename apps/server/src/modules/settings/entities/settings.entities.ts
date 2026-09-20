@@ -25,6 +25,12 @@ export class Settings implements SettingDto {
   @Column({ nullable: true })
   apikey: string;
 
+  @Column({ nullable: true })
+  cantinarr_url?: string;
+
+  @Column({ nullable: true })
+  cantinarr_api_key?: string;
+
   // Seerr integration
   @Column({ nullable: true })
   seerr_url: string;

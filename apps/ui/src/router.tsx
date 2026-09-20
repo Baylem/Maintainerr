@@ -91,6 +91,10 @@ const settingsMetadataRoute = createLazyRoute(
 const settingsRadarrRoute = createLazyRoute(
   () => import('./components/Settings/Radarr'),
 )
+const settingsCantinarrRoute = createLazyRoute(
+  () => import('./components/Settings/Cantinarr/CantinarrSettings'),
+)
+
 const settingsSeerrRoute = createLazyRoute(
   () => import('./components/Settings/Seerr'),
 )
@@ -297,6 +301,11 @@ const appRoutes: AppRoute[] = [
         path: 'radarr',
         lazy: settingsRadarrRoute.lazy,
         preload: settingsRadarrRoute.preload,
+      },
+      {
+        path: 'cantinarr',
+        lazy: settingsCantinarrRoute.lazy,
+        preload: settingsCantinarrRoute.preload,
       },
       {
         path: 'seerr',
