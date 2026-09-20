@@ -336,3 +336,7 @@ adapter still needs explicit destination-instance and media-server identity mapp
 verified playback evidence, and preview-only retention comparisons. Recorded account
 links and saved season mappings are historical data, not proof of current access or
 file availability. Empty retained history does not establish pre-Cantinarr history.
+
+### Cantinarr retention eligibility lab
+
+[tools/cantinarr-retention-lab](tools/cantinarr-retention-lab/README.md) is an opt-in Docker experiment that reads the scoped Cantinarr history API and dispatches explicitly mapped movie candidates through Maintainerr's existing collection action endpoint. Its five-minute request-age policy, live protection checks and fresh pre-write evaluation are isolated from the native rule editor and production retention configuration.
