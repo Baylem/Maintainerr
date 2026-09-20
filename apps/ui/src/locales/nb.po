@@ -677,6 +677,22 @@ msgstr ""
 msgid "Cannot delete preset templates"
 msgstr ""
 
+#: src/components/Settings/Cantinarr/CantinarrSettings.tsx
+msgid "Cantinarr connection could not be saved"
+msgstr ""
+
+#: src/components/Settings/Cantinarr/CantinarrSettings.tsx
+msgid "Cantinarr connection saved"
+msgstr ""
+
+#: src/components/Settings/Cantinarr/CantinarrSettings.tsx
+msgid "Cantinarr Settings"
+msgstr ""
+
+#: src/components/Settings/Cantinarr/CantinarrSettings.tsx
+msgid "Cantinarr settings - Maintainerr"
+msgstr ""
+
 #: src/components/OverlayEditor/PropertiesPanel.tsx
 msgid "center"
 msgstr ""
@@ -890,6 +906,10 @@ msgstr ""
 
 #: src/components/StorageMetrics/index.tsx
 msgid "Connect a Plex or Jellyfin server in Settings to see library item counts here."
+msgstr ""
+
+#: src/components/Settings/Cantinarr/CantinarrSettings.tsx
+msgid "Connect to the Cantinarr integration API v1 build. This connection validates retained request history; it does not enable Cantinarr retention rules."
 msgstr ""
 
 #: src/components/Settings/index.tsx
@@ -1566,6 +1586,10 @@ msgstr ""
 msgid "Failed to connect to {serviceName}. Verify URL and API key."
 msgstr ""
 
+#: src/components/Settings/Cantinarr/CantinarrSettings.tsx
+msgid "Failed to connect to Cantinarr. Check the integration build, URL, token permissions and history completeness."
+msgstr ""
+
 #: src/components/Settings/Emby/index.tsx
 msgid "Failed to connect to Emby. Verify URL and API key."
 msgstr ""
@@ -2013,6 +2037,10 @@ msgstr ""
 
 #: src/pages/CollectionsListPage.tsx
 msgid "Initiated collection handling in the background."
+msgstr ""
+
+#: src/components/Settings/Cantinarr/CantinarrSettings.tsx
+msgid "Integration token"
 msgstr ""
 
 #: src/components/Rules/RuleGroup/AddModal/index.tsx
@@ -4489,6 +4517,10 @@ msgstr ""
 
 #: src/components/OverlayEditor/PropertiesPanel.tsx
 msgid "Uppercase"
+msgstr ""
+
+#: src/components/Settings/Cantinarr/CantinarrSettings.tsx
+msgid "Use an expiring integration token with request and identity read permissions. Enter it again when changing the URL."
 msgstr ""
 
 #: src/components/Settings/Plex/index.tsx

@@ -154,6 +154,8 @@ describe('database migrations', () => {
         notnull: 0,
         dflt_value: null,
       };
+      expect(settings.cantinarr_url).toMatchObject(nullableVarchar);
+      expect(settings.cantinarr_api_key).toMatchObject(nullableVarchar);
       expect(settings.tracearr_url).toMatchObject(nullableVarchar);
       expect(settings.tracearr_api_key).toMatchObject(nullableVarchar);
       expect(settings.tracearr_server_id).toMatchObject(nullableVarchar);
@@ -207,7 +209,7 @@ describe('database migrations', () => {
     try {
       await ds.runMigrations();
       await ds.query(
-        `INSERT INTO settings ("id", "applicationTitle", "applicationUrl", "locale", "metadata_provider_preference", "download_client_url", "download_client_delete_data", "download_client_fallback_ratio") VALUES (1, 'Media Manager', 'http://localhost:6246', 'en', 'tmdb_primary', 'http://localhost:8080', 0, 1.25)`,
+        `INSERT INTO settings ("id", "applicationTitle", "applicationUrl", "locale", "metadata_provider_preference", "download_client_url", "download_client_delete_data", "download_client_fallback_ratio", "download_client_type") VALUES (1, 'Media Manager', 'http://localhost:6246', 'en', 'tmdb_primary', 'http://localhost:8080', 0, 1.25, 'qbittorrent')`,
       );
       await ds.query(
         `INSERT INTO settings ("id", "applicationTitle", "applicationUrl", "locale", "metadata_provider_preference") VALUES (2, 'Fresh', 'http://localhost:6246', 'en', 'tmdb_primary')`,
@@ -219,8 +221,7 @@ describe('database migrations', () => {
 
       const rows = await ds.query(`SELECT * FROM settings ORDER BY id`);
       expect(rows).toHaveLength(2);
-      // A configured client keeps the qBittorrent backfill: the only client
-      // that existed before the type column did.
+      // The new connection must preserve existing configured integrations.
       expect(rows[0]).toMatchObject({
         applicationTitle: 'Media Manager',
         applicationUrl: 'http://localhost:6246',
@@ -228,8 +229,10 @@ describe('database migrations', () => {
         download_client_delete_data: 0,
         download_client_fallback_ratio: 1.25,
         download_client_type: 'qbittorrent',
+        cantinarr_url: null,
+        cantinarr_api_key: null,
       });
-      // No URL means no client, so the earlier default is cleared.
+      // An unconfigured client remains unconfigured.
       expect(rows[1]).toMatchObject({
         applicationTitle: 'Fresh',
         download_client_url: null,
@@ -244,8 +247,9 @@ describe('database migrations', () => {
   // non-reversible down() paths (production only ever migrates up). We do confirm
   // the newest migration's down() is symmetric - the regression this catches when
   // a migration is added.
-  it('revert the newest migration cleanly (symmetric down)', async () => {
-    const ds = await makeDS(all.map((m) => m.cls)).initialize();
+  it('reverts the download-client nullability migration cleanly', async () => {
+    const applicable = all.filter((m) => m.ts <= 1789161267512);
+    const ds = await makeDS(applicable.map((m) => m.cls)).initialize();
     try {
       await ds.runMigrations();
       const typeColumn = async () =>
@@ -268,7 +272,30 @@ describe('database migrations', () => {
       const [row] = await ds.query(`SELECT download_client_type FROM settings`);
       expect(row.download_client_type).toBe('qbittorrent');
       const [{ c }] = await ds.query(`SELECT COUNT(*) AS c FROM migrations`);
-      expect(Number(c)).toBe(all.length - 1);
+      expect(Number(c)).toBe(applicable.length - 1);
+    } finally {
+      await ds.destroy();
+    }
+  });
+  it('reverts Cantinarr columns without losing other connection settings', async () => {
+    const ds = await makeDS(all.map((m) => m.cls)).initialize();
+    try {
+      await ds.runMigrations();
+      await ds.query(
+        `INSERT INTO settings (id, seerr_url, cantinarr_url, cantinarr_api_key) VALUES (1, 'http://seerr.local', 'http://cantinarr.local', 'fixture-token')`,
+      );
+      await ds.undoLastMigration();
+      const settings = byName(await columns(ds, 'settings'));
+      expect(settings.cantinarr_url).toBeUndefined();
+      expect(settings.cantinarr_api_key).toBeUndefined();
+      expect(
+        (await ds.query('SELECT seerr_url FROM settings'))[0].seerr_url,
+      ).toBe('http://seerr.local');
+      await ds.runMigrations();
+      expect(
+        (await ds.query('SELECT cantinarr_api_key FROM settings'))[0]
+          .cantinarr_api_key,
+      ).toBeNull();
     } finally {
       await ds.destroy();
     }

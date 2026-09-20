@@ -51,6 +51,7 @@ flowchart LR
   API --> Servarr["Radarr / Sonarr"]
   API --> DownloadClients["qBittorrent / Transmission"]
   API --> Seerr["Seerr"]
+  API --> Cantinarr["Cantinarr connection"]
   API --> Tautulli["Tautulli"]
   API --> Streamystats["Streamystats"]
   API --> Metadata["TMDB / TVDB / Sportarr"]
@@ -309,3 +310,29 @@ architecture and intent only; for how the code works, read the code.
 - Seerr: The request-management integration (github.com/seerr-team/seerr) used
   for request cleanup.
 - SSE: Server-sent events used for live rule and collection job updates.
+
+## Cantinarr connection
+
+Settings > Cantinarr stores a server URL and an expiring integration token. It requires
+Cantinarr's read-only integration API v1, implemented in the companion
+[Cantinarr integration branch](https://github.com/Baylem/cantinarr/pull/1).
+An ordinary Cantinarr login token or a stock build without those endpoints does not work.
+
+Create a token in Cantinarr with request reads, identity reads and explicit Radarr/Sonarr
+instance grants. Save the base URL and token in Maintainerr, then use Test. Test validates
+capabilities and every page of retained request history. Expired/revoked tokens,
+missing scopes, incomplete history, repeated cursors and changed revisions fail the test.
+HTTP redirects are rejected, request bodies are bounded, and a sweep is limited to
+60 seconds and 1,000 pages. Errors do not expose upstream credentials or raw responses.
+
+The token is masked on reads. An unchanged-URL save can reuse the masked placeholder;
+a URL change requires entering the token again. Clear both fields and save to remove
+the connection. Credentials use the existing local settings database and deployment
+access protections; this feature does not add application login or encryption at rest.
+
+This connection is not a retention-provider switch. Existing Seerr rules continue to
+use Seerr. No Cantinarr request reset or deletion operation is exposed. A consumer
+adapter still needs explicit destination-instance and media-server identity mappings,
+verified playback evidence, and preview-only retention comparisons. Recorded account
+links and saved season mappings are historical data, not proof of current access or
+file availability. Empty retained history does not establish pre-Cantinarr history.
